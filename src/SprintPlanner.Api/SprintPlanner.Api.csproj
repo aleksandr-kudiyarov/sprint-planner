@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <ItemGroup>
+    <ProjectReference Include="..\SprintPlanner.Domain\SprintPlanner.Domain.csproj" />
+    <ProjectReference Include="..\SprintPlanner.Application\SprintPlanner.Application.csproj" />
+    <ProjectReference Include="..\SprintPlanner.Infrastructure\SprintPlanner.Infrastructure.csproj" />
+    <ProjectReference Include="..\SprintPlanner.Optimization\SprintPlanner.Optimization.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+</Project>

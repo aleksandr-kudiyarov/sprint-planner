@@ -1,0 +1,115 @@
+:root {
+  --bg: #0f172a;
+  --panel: #1e293b;
+  --panel-2: #273549;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --accent: #38bdf8;
+  --green: #22c55e;
+  --yellow: #eab308;
+  --red: #ef4444;
+  --border: #334155;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.app { min-height: 100vh; }
+
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+}
+.topbar h1 { font-size: 1.2rem; margin: 0; color: var(--accent); }
+.topbar nav { display: flex; gap: 1rem; }
+.topbar nav a { color: var(--muted); text-decoration: none; padding: 0.25rem 0.5rem; border-radius: 6px; }
+.topbar nav a.active { color: var(--text); background: var(--panel-2); }
+
+.content { padding: 1.5rem; max-width: 1200px; margin: 0 auto; }
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+h2 { margin-top: 0; }
+
+button {
+  background: var(--accent);
+  color: #08263a;
+  border: none;
+  padding: 0.5rem 0.9rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+button.secondary { background: var(--panel-2); color: var(--text); border: 1px solid var(--border); }
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+input, select, textarea {
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.4rem 0.5rem;
+}
+
+label { display: block; font-size: 0.8rem; color: var(--muted); margin-bottom: 0.2rem; }
+.field { margin-bottom: 0.6rem; }
+.row { display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: flex-end; }
+
+table { width: 100%; border-collapse: collapse; }
+th, td { text-align: left; padding: 0.5rem 0.6rem; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+th { color: var(--muted); font-weight: 600; }
+
+.badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  background: var(--panel-2);
+  color: var(--muted);
+}
+.badge.warn { background: #422006; color: var(--yellow); }
+.badge.crit { background: #450a0a; color: var(--red); }
+
+.bar { height: 8px; border-radius: 4px; background: var(--panel-2); overflow: hidden; }
+.bar > span { display: block; height: 100%; }
+.bar.ok > span { background: var(--green); }
+.bar.warn > span { background: var(--yellow); }
+.bar.over > span { background: var(--red); }
+
+.plan-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+.plan-card { background: var(--panel); border: 2px solid var(--border); border-radius: 10px; padding: 1rem; cursor: pointer; }
+.plan-card.selected { border-color: var(--accent); }
+.plan-card h3 { margin: 0 0 0.5rem; }
+.metric-line { display: flex; justify-content: space-between; font-size: 0.85rem; padding: 0.15rem 0; }
+
+.board { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
+.dev-col { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 0.75rem; min-height: 120px; }
+.dev-col.dragover { border-color: var(--accent); }
+.task-card { background: var(--panel-2); border: 1px solid var(--border); border-radius: 8px; padding: 0.5rem; margin-bottom: 0.5rem; cursor: grab; }
+.task-card.locked { cursor: not-allowed; opacity: 0.85; }
+.task-card .title { font-weight: 600; font-size: 0.9rem; }
+.task-meta { font-size: 0.75rem; color: var(--muted); display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.25rem; }
+
+.warnings { background: #422006; border: 1px solid #854d0e; border-radius: 8px; padding: 0.5rem 0.75rem; margin: 0.5rem 0; }
+.warnings li { color: #fde68a; font-size: 0.85rem; }
+
+.error { color: var(--red); font-size: 0.85rem; }
+.muted { color: var(--muted); }
+.checkbox-row { display: flex; align-items: center; gap: 0.5rem; }
+.weight-row { display: grid; grid-template-columns: 120px 1fr 40px; align-items: center; gap: 0.5rem; margin-bottom: 0.3rem; }

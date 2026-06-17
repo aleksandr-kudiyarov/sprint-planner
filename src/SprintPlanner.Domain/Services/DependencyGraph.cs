@@ -70,4 +70,56 @@ public sealed class DependencyGraph
     }
 
     public bool IsAcyclic() => TopologicalOrder() is not null;
+
+    /// <summary>
+    /// Longest path through the DAG where each node contributes <paramref name="weight"/>
+    /// (e.g. a task's adjusted hours). Returns the total weight and the set of nodes on a
+    /// maximum-weight path — the critical path (F3.5). Returns (0, empty) when the graph
+    /// is empty; throws if the graph has a cycle.
+    /// </summary>
+    public (decimal Length, IReadOnlyCollection<Guid> Nodes) LongestPathByWeight(Func<Guid, decimal> weight)
+    {
+        var order = TopologicalOrder()
+            ?? throw new InvalidOperationException("Cannot compute critical path on a cyclic graph.");
+
+        // best[n] = max weight of a path ending at n; prev[n] = predecessor on that path.
+        var best = new Dictionary<Guid, decimal>();
+        var prev = new Dictionary<Guid, Guid?>();
+
+        foreach (var node in order)
+        {
+            var nodeWeight = weight(node);
+            var bestPred = decimal.MinValue;
+            Guid? bestPredNode = null;
+
+            foreach (var dep in _dependsOn[node])
+            {
+                if (best[dep] > bestPred)
+                {
+                    bestPred = best[dep];
+                    bestPredNode = dep;
+                }
+            }
+
+            best[node] = nodeWeight + (bestPredNode is null ? 0m : bestPred);
+            prev[node] = bestPredNode;
+        }
+
+        if (best.Count == 0)
+        {
+            return (0m, Array.Empty<Guid>());
+        }
+
+        var end = best.OrderByDescending(kv => kv.Value).First().Key;
+        var pathNodes = new List<Guid>();
+        Guid? cursor = end;
+        while (cursor is not null)
+        {
+            pathNodes.Add(cursor.Value);
+            cursor = prev[cursor.Value];
+        }
+
+        pathNodes.Reverse();
+        return (best[end], pathNodes);
+    }
 }

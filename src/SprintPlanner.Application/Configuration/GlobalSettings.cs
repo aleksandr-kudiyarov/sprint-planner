@@ -6,6 +6,11 @@ namespace SprintPlanner.Application.Configuration;
 /// </summary>
 public sealed class GlobalSettings
 {
+    /// <summary>Well-known id of the single settings row.</summary>
+    public static readonly Guid SingletonId = new("00000000-0000-0000-0000-0000000005e7");
+
+    public Guid Id { get; set; } = SingletonId;
+
     /// <summary>Default sprint length in working days.</summary>
     public int DefaultSprintLengthDays { get; set; } = 10;
 

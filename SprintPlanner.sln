@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SprintPlanner.Domain.Tests"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SprintPlanner.Optimization.Tests", "tests\SprintPlanner.Optimization.Tests\SprintPlanner.Optimization.Tests.csproj", "{33594ADE-87D1-4115-B863-CADDC186CB4F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SprintPlanner.Application.Tests", "tests\SprintPlanner.Application.Tests\SprintPlanner.Application.Tests.csproj", "{58E4B38F-DA91-488D-BD72-CD87308E4E02}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,6 +60,10 @@ Global
 		{33594ADE-87D1-4115-B863-CADDC186CB4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33594ADE-87D1-4115-B863-CADDC186CB4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33594ADE-87D1-4115-B863-CADDC186CB4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58E4B38F-DA91-488D-BD72-CD87308E4E02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58E4B38F-DA91-488D-BD72-CD87308E4E02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58E4B38F-DA91-488D-BD72-CD87308E4E02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58E4B38F-DA91-488D-BD72-CD87308E4E02}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{36FB5D25-1E25-4491-8AC6-B5F3888B2677} = {F1A5AD3F-B226-4184-92CE-847BCB926AD3}
@@ -67,5 +73,6 @@ Global
 		{48EE542E-B25F-49DA-BE06-0E2EEDF27079} = {F1A5AD3F-B226-4184-92CE-847BCB926AD3}
 		{9116369D-3060-45C6-93D1-64A5BB8C94BE} = {9AF4B353-5FBA-493C-8E26-6C5B5BCEC936}
 		{33594ADE-87D1-4115-B863-CADDC186CB4F} = {9AF4B353-5FBA-493C-8E26-6C5B5BCEC936}
+		{58E4B38F-DA91-488D-BD72-CD87308E4E02} = {9AF4B353-5FBA-493C-8E26-6C5B5BCEC936}
 	EndGlobalSection
 EndGlobal

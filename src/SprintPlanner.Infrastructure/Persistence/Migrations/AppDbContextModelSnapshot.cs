@@ -17,7 +17,7 @@ namespace SprintPlanner.Infrastructure.Persistence.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.28")
+                .HasAnnotation("ProductVersion", "8.0.11")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -25,7 +25,6 @@ namespace SprintPlanner.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("SprintPlanner.Application.Configuration.GlobalSettings", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<decimal>("ColdStartBeta")
@@ -74,7 +73,6 @@ namespace SprintPlanner.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("SprintPlanner.Domain.Entities.BacklogItem", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<decimal>("BusinessValue")
@@ -141,7 +139,6 @@ namespace SprintPlanner.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("SprintPlanner.Domain.Entities.CalendarOverride", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<decimal>("AvailableHours")
@@ -164,7 +161,6 @@ namespace SprintPlanner.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("SprintPlanner.Domain.Entities.Competency", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<string>("Description")
@@ -188,7 +184,6 @@ namespace SprintPlanner.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("SprintPlanner.Domain.Entities.CompetencyRequirement", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("BacklogItemId")
@@ -212,7 +207,6 @@ namespace SprintPlanner.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("SprintPlanner.Domain.Entities.Developer", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<decimal>("CapacityHoursPerDay")
@@ -240,7 +234,6 @@ namespace SprintPlanner.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("SprintPlanner.Domain.Entities.DeveloperCompetency", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("CompetencyId")
@@ -277,7 +270,6 @@ namespace SprintPlanner.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("SprintPlanner.Domain.Entities.DeveloperCompetencyHistory", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("ChangedAt")
@@ -314,7 +306,6 @@ namespace SprintPlanner.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("SprintPlanner.Domain.Entities.Sprint", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<DateOnly>("EndDate")
@@ -349,7 +340,6 @@ namespace SprintPlanner.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("SprintPlanner.Domain.Entities.SprintHistory", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<decimal>("ActualHours")
@@ -392,7 +382,6 @@ namespace SprintPlanner.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("SprintPlanner.Domain.Entities.SprintPlan", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("GeneratedAt")
@@ -431,7 +420,6 @@ namespace SprintPlanner.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("SprintPlanner.Domain.Entities.TaskAssignment", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<decimal>("AdjustedHours")

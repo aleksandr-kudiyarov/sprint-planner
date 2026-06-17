@@ -28,6 +28,18 @@ public sealed class AppDbContext : DbContext, IAppDbContext
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
 
+        // Ids are always assigned in code (see Entity), so keep the database out of key
+        // generation. Without this, Npgsql treats Guid keys as store-generated and EF
+        // mistakes navigation-discovered children for existing rows (UPDATE → 0 rows).
+        foreach (var entity in modelBuilder.Model.GetEntityTypes())
+        {
+            var key = entity.FindProperty("Id");
+            if (key is not null && key.ClrType == typeof(Guid))
+            {
+                key.ValueGenerated = Microsoft.EntityFrameworkCore.Metadata.ValueGenerated.Never;
+            }
+        }
+
         // Seed the singleton settings row with defaults.
         modelBuilder.Entity<GlobalSettings>().HasData(new GlobalSettings());
     }

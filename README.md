@@ -46,9 +46,59 @@ Keycloak (OIDC/JWT) · Docker / Kubernetes · Prometheus + Grafana.
 
 ```bash
 dotnet build SprintPlanner.sln
-dotnet test
+dotnet test                       # 45 unit tests (domain, statistics, optimizer)
 ```
+
+## Running
+
+### Full stack (Docker)
+
+```bash
+docker compose up --build
+# API      → http://localhost:5080  (Swagger at /swagger in Development)
+# Frontend → http://localhost:5173
+# Prometheus → http://localhost:9090
+# Keycloak  → http://localhost:8081
+```
+
+### Local development
+
+```bash
+# 1. PostgreSQL on :5432 (database "sprintplanner")
+# 2. API — applies migrations on startup
+dotnet run --project src/SprintPlanner.Api      # http://localhost:5080
+# 3. Frontend (proxies /api to the API)
+cd frontend && npm install && npm run dev       # http://localhost:5173
+```
+
+Authentication is enforced only when `Authentication:Authority` (a Keycloak realm
+URL) is configured; otherwise the API runs open for local development and logs a
+warning. `/healthz` and `/metrics` are always anonymous.
+
+## Requirements coverage
+
+| Area | Where |
+|---|---|
+| Domain model (§3) | `SprintPlanner.Domain` — entities, enums, value objects |
+| Effective capacity, calendar overrides (F1.1) | `Developer.EffectiveCapacity` |
+| Competency levels + change history (F1.2) | `DeveloperCompetency`, `DeveloperCompetencyHistory` |
+| Backlog, dependency DAG validation, lock (F1.3, Q5) | `BacklogEndpoints`, `DependencyGraph` |
+| Velocity, β, σ, trend, cold start (F2) | `StatisticsCalculator` |
+| ILP optimizer, robust capacity, constraints (F3.2) | `OrToolsSprintOptimizer` |
+| Pareto front (F3.3) | weight-profile sweep in the optimizer |
+| Uncertainty / overload probability (F3.4) | `PlanMetricsCalculator` |
+| Critical path (F3.5) | `DependencyGraph.LongestPathByWeight` |
+| Plan comparison, radar, board, drag & drop (F4) | `frontend/src/pages/PlanningPage.tsx` |
+| Approve plan (F4.4) | `PlanningService.SelectPlanAsync` |
+| Feedback & report (F5) | `FeedbackEndpoints` |
+| Settings / weight profiles (F6) | `SettingsEndpoints`, `OptimizationWeights` |
+| Keycloak JWT, health, Prometheus (5.3–5.5) | `Program.cs`, `PrometheusSolverMetrics` |
 
 ## Status
 
-Implemented iteratively. See commit history for per-step progress.
+Backend complete and verified end-to-end against PostgreSQL 16 (full TL flow:
+create sprint → generate Pareto variants → select → activate → feedback →
+statistics, with skill/dependency/capacity constraints all honoured). Frontend
+covers the team, backlog and plan-decision screens. See commit history for
+per-step progress.
+
